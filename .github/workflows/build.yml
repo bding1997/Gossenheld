@@ -1,4 +1,3 @@
-
 name: Gossenheld APK bauen
 
 on:
@@ -41,6 +40,11 @@ jobs:
       - name: Querformat einstellen
         run: |
           sed -i 's/android:name=".MainActivity"/android:name=".MainActivity" android:screenOrientation="sensorLandscape"/' android/app/src/main/AndroidManifest.xml
+
+      - name: Festen Signaturschlüssel verwenden (damit Updates den Spielstand behalten)
+        run: |
+          mkdir -p ~/.android
+          cp debug.keystore ~/.android/debug.keystore
 
       - name: APK bauen
         working-directory: android
